@@ -37,7 +37,5 @@ fi
 aws iam create-account-alias --account-alias $account_alias
 
 # Use Terraform with local state to create state bucket
-pushd terraform-state-bucket >/dev/null
 terraform init
 terraform apply -auto-approve
-popd >/dev/null
