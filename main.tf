@@ -13,8 +13,8 @@ module "terraform-state-bucket" {
 resource "aws_dynamodb_table" "terraform-state-lock" {
   name           = "terraform-state-lock"
   hash_key       = "LockID"
-  read_capacity  = 5
-  write_capacity = 5
+  read_capacity  = 2
+  write_capacity = 2
 
   attribute {
     name = "LockID"
