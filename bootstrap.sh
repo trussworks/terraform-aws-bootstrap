@@ -27,15 +27,15 @@ if [[ -n $current_alias ]]; then
 fi
 
 # Bail out if the bucket already exists
-status=$(aws s3 ls s3://$bucket/ 2>&1 | grep -o 'bucket does not exist') || true
+status=$(aws s3 ls "s3://$bucket/" 2>&1 | grep -o 'bucket does not exist') || true
 if [[ $status != 'bucket does not exist' ]]; then
     set +x
-    echo -e '\nLooks like the bucket '$bucket' already exists!'
+    echo -e '\nLooks like the bucket '"$bucket"' already exists!'
     exit 1
 fi
 
 # Set account alias (required for bucket creation)
-aws iam create-account-alias --account-alias $account_alias
+aws iam create-account-alias --account-alias "$account_alias"
 
 # Generate terraform.tfvars with the chosen AWS region
 echo "region = \"$region\"" > ${tfvars_file}
