@@ -1,5 +1,6 @@
+#
 # Create Terraform state bucket
-# -----------------------------
+#
 
 module "terraform-state-bucket" {
   source  = "trussworks/s3-private-bucket/aws"
@@ -7,8 +8,9 @@ module "terraform-state-bucket" {
   bucket  = "terraform-state-${var.region}"
 }
 
+#
 # Create Terraform locking table
-# ------------------------------
+#
 
 resource "aws_dynamodb_table" "terraform-state-lock" {
   name           = "terraform-state-lock"

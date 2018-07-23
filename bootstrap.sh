@@ -17,6 +17,7 @@ readonly account_alias=$1
 readonly region=$2
 
 readonly bucket=${account_alias}-terraform-state-${region}
+readonly tfvars_file="terraform.tfvars"
 
 # Bail out if any account alias already exists
 current_alias=$(aws iam list-account-aliases --query 'AccountAliases' --output text)
@@ -36,6 +37,11 @@ fi
 # Set account alias (required for bucket creation)
 aws iam create-account-alias --account-alias $account_alias
 
+# Generate terraform.tfvars with the chosen AWS region
+echo "region = \"$region\"" > ${tfvars_file}
+
 # Use Terraform with local state to create state bucket
 terraform init
 terraform apply -auto-approve
+
+echo "Please commit the changes to $tfvars_file to complete the bootstrap process."
