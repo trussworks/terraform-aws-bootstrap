@@ -7,14 +7,15 @@
 set -e -o pipefail
 
 usage() {
-    echo "Usage: $0 <account-alias> <region>"
+    echo "Usage: $0 <account-alias> <region> <logging_bucket>"
     exit 1
 }
-[[ -z $1 || -z $2 ]] && usage
+[[ -z $1 || -z $2 || -z $3 ]] && usage
 set -u
 
 readonly account_alias=$1
 readonly region=$2
+readonly logging_bucket=$3
 
 readonly bucket=${account_alias}-terraform-state-${region}
 readonly tfvars_file=terraform.tfvars
@@ -37,7 +38,9 @@ elif [[ $current_alias != "$account_alias" ]]; then
 fi
 
 # Generate terraform.tfvars with the chosen AWS region
-echo "region = \"$region\"" > $tfvars_file
+rm -f $tfvars_file
+echo "region = \"$region\"" >> $tfvars_file
+echo "logging_bucket = \"$logging_bucket\"" >> $tfvars_file
 
 # Create resources
 terraform init
