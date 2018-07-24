@@ -17,14 +17,7 @@ readonly account_alias=$1
 readonly region=$2
 
 readonly bucket=${account_alias}-terraform-state-${region}
-readonly tfvars_file="terraform.tfvars"
-
-# Bail out if any account alias already exists
-current_alias=$(aws iam list-account-aliases --query 'AccountAliases' --output text)
-if [[ -n $current_alias ]]; then
-    echo "This account already has the alias '$current_alias' set!"
-    exit 1
-fi
+readonly tfvars_file=terraform.tfvars
 
 # Bail out if the bucket already exists
 status=$(aws s3 ls "s3://$bucket/" 2>&1 | grep -o 'bucket does not exist') || true
@@ -34,14 +27,26 @@ if [[ $status != 'bucket does not exist' ]]; then
     exit 1
 fi
 
-# Set account alias (required for bucket creation)
-aws iam create-account-alias --account-alias "$account_alias"
+current_alias=$(aws iam list-account-aliases --query 'AccountAliases' --output text)
+if [[ -z $current_alias ]]; then
+    echo "Setting account alias to $account_alias"
+    aws iam create-account-alias --account-alias "$account_alias"
+elif [[ $current_alias != "$account_alias" ]]; then
+    echo "Current alias '$current_alias' does not match '$account_alias'!"
+    exit 1
+fi
 
 # Generate terraform.tfvars with the chosen AWS region
-echo "region = \"$region\"" > ${tfvars_file}
+echo "region = \"$region\"" > $tfvars_file
 
-# Use Terraform with local state to create state bucket
+# Create resources
 terraform init
 terraform apply -auto-approve
 
-echo "Please commit the changes to $tfvars_file to complete the bootstrap process."
+# Save the region and local state
+git add "$tfvars_file" terraform.tfstate
+git commit -m "Bootstrapped Terraform remote state setup"
+
+echo
+echo
+echo "To complete the bootstrap process, push these changes to your repo!"
