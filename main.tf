@@ -3,9 +3,10 @@
 #
 
 module "terraform-state-bucket" {
-  source  = "trussworks/s3-private-bucket/aws"
-  version = "~> 1.3.0"
-  bucket  = "terraform-state-${var.region}"
+  source         = "trussworks/s3-private-bucket/aws"
+  version        = "~> 1.5.0"
+  bucket         = "terraform-state-${var.region}"
+  logging_bucket = "${var.logging_bucket}"
 }
 
 #
