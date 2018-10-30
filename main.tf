@@ -19,6 +19,10 @@ resource "aws_dynamodb_table" "terraform-state-lock" {
   read_capacity  = 2
   write_capacity = 2
 
+  server_side_encryption {
+    enabled = true
+  }
+
   attribute {
     name = "LockID"
     type = "S"
