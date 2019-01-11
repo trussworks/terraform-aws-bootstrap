@@ -41,6 +41,7 @@ fi
 rm -f $tfvars_file
 echo "region = \"$region\"" >> $tfvars_file
 echo "logging_bucket = \"$logging_bucket\"" >> $tfvars_file
+terraform fmt $tfvars_file > /dev/null
 
 # Create resources
 terraform init
