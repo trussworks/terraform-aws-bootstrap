@@ -4,7 +4,7 @@
 
 module "terraform-state-bucket" {
   source         = "trussworks/s3-private-bucket/aws"
-  version        = "~> 1.5.0"
+  version        = "~> 1.6.0"
   bucket         = "terraform-state-${var.region}"
   logging_bucket = "${var.logging_bucket}"
 }
