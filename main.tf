@@ -1,19 +1,40 @@
 #
-# Create Terraform state bucket
+# Terraform state bucket
 #
 
-module "terraform-state-bucket" {
+module "terraform_state_bucket" {
   source         = "trussworks/s3-private-bucket/aws"
-  version        = "~> 1.6.0"
-  bucket         = "terraform-state-${var.region}"
-  logging_bucket = "${var.logging_bucket}"
+  version        = "~> 1.7.0"
+  bucket         = "${var.state_bucket}"
+  logging_bucket = "${module.terraform_state_bucket_logs.aws_logs_bucket}"
+
+  use_account_alias_prefix = false
+
+  tags = {
+    Automation = "Terraform"
+  }
 }
 
 #
-# Create Terraform locking table
+# Terraform state bucket logging
 #
 
-resource "aws_dynamodb_table" "terraform-state-lock" {
+module "terraform_state_bucket_logs" {
+  source  = "trussworks/logs/aws"
+  version = "~> 2.0.0"
+  region  = "${var.region}"
+
+  s3_bucket_name = "${var.logging_bucket}"
+
+  allow_s3      = true
+  default_allow = false
+}
+
+#
+# Terraform state locking
+#
+
+resource "aws_dynamodb_table" "terraform_state_lock" {
   name           = "terraform-state-lock"
   hash_key       = "LockID"
   read_capacity  = 2

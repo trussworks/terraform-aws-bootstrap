@@ -1,30 +1,43 @@
 #!/bin/bash
 #
 #   For brand new AWS accounts, this script will configure the account alias
-#   prior to applying Terraform. It will only run if the alias and bucket do
-#   not exist.
+#   prior to applying Terraform. It will exit if the state bucket already
+#   exists.
 #
 set -e -o pipefail
 
 usage() {
-    echo "Usage: $0 <account-alias> <region> <logging_bucket>"
+    echo "Usage: $0 <account-alias> <region>"
     exit 1
 }
-[[ -z $1 || -z $2 || -z $3 ]] && usage
+[[ -z $1 || -z $2 ]] && usage
 set -u
 
 readonly account_alias=$1
 readonly region=$2
-readonly logging_bucket=$3
 
-readonly bucket=${account_alias}-terraform-state-${region}
+readonly state_bucket=${account_alias}-terraform-state-${region}
+readonly logging_bucket=${account_alias}-terraform-state-logs-${region}
 readonly tfvars_file=terraform.tfvars
 
-# Bail out if the bucket already exists
-status=$(aws s3 ls "s3://$bucket/" 2>&1 | grep -o 'bucket does not exist') || true
-if [[ $status != 'bucket does not exist' ]]; then
+bucket_exists() {
+    bucket=$1
+    status=$(aws s3 ls "s3://$bucket/" 2>&1 | grep -o 'bucket does not exist') || true
+    [[ $status != 'bucket does not exist' ]]
+}
+
+
+# Bail out if the state bucket already exists
+if bucket_exists "$state_bucket"; then
     set +x
-    echo -e '\nLooks like the bucket '"$bucket"' already exists!'
+    echo -e '\nLooks like the bucket '"$state_bucket"' already exists!'
+    exit 1
+fi
+
+# Bail out if the logging bucket already exists
+if bucket_exists "$logging_bucket"; then
+    set +x
+    echo -e '\nLooks like the bucket '"$logging_bucket"' already exists!'
     exit 1
 fi
 
@@ -37,10 +50,13 @@ elif [[ $current_alias != "$account_alias" ]]; then
     exit 1
 fi
 
-# Generate terraform.tfvars with the chosen AWS region
+# Generate terraform.tfvars with user settings
 rm -f $tfvars_file
-echo "region = \"$region\"" >> $tfvars_file
-echo "logging_bucket = \"$logging_bucket\"" >> $tfvars_file
+{
+    echo "region = \"$region\""
+    echo "state_bucket = \"$state_bucket\""
+    echo "logging_bucket = \"$logging_bucket\""
+} >> $tfvars_file
 terraform fmt $tfvars_file > /dev/null
 
 # Create resources
