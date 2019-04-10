@@ -1,10 +1,12 @@
 # Bootstrapping Terraform
 
-This solves the 🐓 and 🥚 problem: How do you Terraform the remote state bucket? It takes the approach of keeping a local statefile in the repo that only manages these resources:
+This solves a 🐓 and 🥚 problem in new AWS accounts (or for AWS accounts that have never used Terraform): How do you Terraform the remote state bucket? It takes the approach of keeping a local statefile in the repo that only manages these resources:
 
 * S3 bucket for remote state file (using the TrussWorks [s3-private-bucket module](https://registry.terraform.io/modules/trussworks/s3-private-bucket/aws))
 * S3 bucket for storing state bucket access logs (using the TrussWorks [logs module](https://registry.terraform.io/modules/trussworks/logs/aws))
 * DynamoDB table for state locking and consistency checking
+
+If the AWS account you are using already has a Terraform state bucket and locking table, this may not be the right tool for you.
 
 ## Bootstrapping
 
