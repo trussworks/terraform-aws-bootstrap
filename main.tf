@@ -49,7 +49,7 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
     type = "S"
   }
 
-  tags {
+  tags = {
     Name       = "terraform-state-lock"
     Automation = "Terraform"
   }
