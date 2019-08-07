@@ -12,13 +12,15 @@ If the AWS account you are using already has a Terraform state bucket and lockin
 
 Copy the code in this repo to where your Terraform config will live. For example, it could live in a directory like `terraform/account-alias/bootstrap`.
 
+If your `aws` commands run via [aws-vault](https://github.com/99designs/aws-vault), you'll need to set the `--no-session` flag so the IAM operations can run without being MFA'd. If you're using the [Truss aws-vault-wrapper](https://github.com/trussworks/terraform-layout-example/blob/master/bin/aws-vault-wrapper) you can set the `AWS_VAULT_NO_SESSION` environment variable. If you don't do this you'll receive an `InvalidClientTokenId` error.
+
 Run the `bootstrap` script, specifying your AWS account alias and region:
 
-```text
+```sh
 ./bootstrap my-account-alias us-west-2
 ```
 
-The account alias will configured (if not set), the resources will be created, and a git commit will be made with the tfvars and state files. Push those changes to your repo.
+The account alias will be configured (if not set), the resources will be created, and a git commit will be made with the tfvars and state files. Push those changes to your repo.
 
 ## Pre-existing environments
 
