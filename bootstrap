@@ -21,7 +21,7 @@ readonly logging_bucket=${account_alias}-terraform-state-logs-${region}
 readonly tfvars_file=terraform.tfvars
 
 # If you are running this with aws-vault and using sessions so you can
-# assume roles cross-account with MFA enabled you will want to run an 
+# assume roles cross-account with MFA enabled you will want to run an
 # arbitrary aws command to instanstiate a session before we need to examine output.
 if [[ -z "${AWS_VAULT_NO_SESSION+x}" || "${AWS_VAULT_NO_SESSION}" != "true" ]]; then
     aws s3 ls
@@ -32,7 +32,7 @@ bucket_exists() {
     output=$(aws s3 ls "s3://$bucket/" 2>&1)
     exit_code="$?"
     status=$(echo "$output" | grep -o 'bucket does not exist') || true
-    if [[ -z "$status" && "$exit_code" > 0 ]]; then
+    if [[ -z "$status" && "$exit_code" -gt 0 ]]; then
         echo "$output"
         exit 1
     fi
