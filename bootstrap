@@ -20,10 +20,13 @@ readonly state_bucket=${account_alias}-terraform-state-${region}
 readonly logging_bucket=${account_alias}-terraform-state-logs-${region}
 readonly tfvars_file=terraform.tfvars
 
+# Run an arbitrary AWS command to create a session. This only matters if you are
+# running this script without AWS_VAULT_NO_SESSION so you can use a cross account role assumption.
+aws s3 ls
+
 bucket_exists() {
     bucket=$1
-    output=$(aws s3 ls "s3://$bucket/")
-    status=$(echo "$output" | grep -o 'bucket does not exist') || true
+    status=$(aws s3 ls "s3://$bucket/" 2>&1 | grep -o 'bucket does not exist') || true
     [[ $status != 'bucket does not exist' ]]
 }
 
