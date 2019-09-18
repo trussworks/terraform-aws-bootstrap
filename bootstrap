@@ -30,7 +30,6 @@ bucket_exists() {
     [[ $status != 'bucket does not exist' ]]
 }
 
-
 # Bail out if the state bucket already exists
 if bucket_exists "$state_bucket"; then
     set +x
