@@ -76,9 +76,7 @@ terraform init
 terraform apply -auto-approve
 
 # Save the region and local state
-git add "$tfvars_file" terraform.tfstate
-git commit -m "Bootstrapped Terraform remote state setup"
-
 echo
 echo
-echo "To complete the bootstrap process, push these changes to your repo!"
+echo "To complete the bootstrap process, you must commit the terraform state files to source control. For example:"
+echo "git add $tfvars_file terraform.tfstate && git commit -m -n 'Bootstrapped Terraform remote state setup' && git push"
