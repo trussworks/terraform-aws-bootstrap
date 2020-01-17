@@ -4,9 +4,9 @@
 
 module "terraform_state_bucket" {
   source         = "trussworks/s3-private-bucket/aws"
-  version        = "~> 1.7.2"
-  bucket         = "${var.state_bucket}"
-  logging_bucket = "${module.terraform_state_bucket_logs.aws_logs_bucket}"
+  version        = "~> 2.0.1"
+  bucket         = var.state_bucket
+  logging_bucket = module.terraform_state_bucket_logs.aws_logs_bucket
 
   use_account_alias_prefix = false
 
@@ -21,10 +21,10 @@ module "terraform_state_bucket" {
 
 module "terraform_state_bucket_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 3.4.0"
-  region  = "${var.region}"
+  version = "~> 4.1.1"
+  region  = var.region
 
-  s3_bucket_name = "${var.logging_bucket}"
+  s3_bucket_name = var.logging_bucket
 
   default_allow = false
 }
@@ -53,3 +53,4 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
     Automation = "Terraform"
   }
 }
+

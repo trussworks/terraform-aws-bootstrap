@@ -1,6 +1,6 @@
 repos:
   - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v2.2.3
+    rev: v2.4.0
     hooks:
       - id: check-json
       - id: check-merge-conflict
@@ -11,19 +11,27 @@ repos:
           - --autofix
       - id: trailing-whitespace
 
-  - repo: git://github.com/detailyang/pre-commit-shell
-    rev: 1.0.5
+  - repo: git://github.com/igorshubovych/markdownlint-cli
+    rev: v0.21.0
     hooks:
-      - id: shell-lint
+      - id: markdownlint
 
   - repo: git://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.12.0
+    rev: v1.22.0
     hooks:
       - id: terraform_docs
       - id: terraform_fmt
-      - id: terraform_validate_no_variables
 
-  - repo: git://github.com/igorshubovych/markdownlint-cli
-    rev: v0.17.0
+  - repo: git://github.com/golangci/golangci-lint
+    rev: v1.22.2
     hooks:
-      - id: markdownlint
+      - id: golangci-lint
+
+  - repo: local
+    hooks:
+      - id: gomod
+        name: gomod
+        entry: scripts/pre-commit-go-mod
+        language: script
+        files: go.mod
+        pass_filenames: false
