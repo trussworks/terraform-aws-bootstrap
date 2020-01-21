@@ -1,14 +1,15 @@
 variable "region" {
   description = "AWS region."
-  type        = "string"
+  type        = string
 }
 
 variable "state_bucket" {
   description = "S3 bucket to store Terraform state in ."
-  type        = "string"
+  type        = string
 }
 
 variable "logging_bucket" {
   description = "S3 bucket to send state_bucket access logs to."
-  type        = "string"
+  type        = string
 }
+
