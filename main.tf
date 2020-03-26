@@ -4,7 +4,7 @@
 
 module "terraform_state_bucket" {
   source         = "trussworks/s3-private-bucket/aws"
-  version        = "~> 2.0.1"
+  version        = "~> 2.0"
   bucket         = var.state_bucket
   logging_bucket = module.terraform_state_bucket_logs.aws_logs_bucket
 
@@ -21,7 +21,7 @@ module "terraform_state_bucket" {
 
 module "terraform_state_bucket_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 5.2.0"
+  version = "~> 6.0"
   region  = var.region
 
   s3_bucket_name = var.logging_bucket
