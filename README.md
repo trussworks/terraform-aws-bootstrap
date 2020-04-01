@@ -31,3 +31,23 @@ The code can be customized for specific environments. For example, if you're boo
 ## Subsequent changes
 
 The `bootstrap` script should only be used for the initial setup. If you need to make any changes to the Terraform code (e.g. adding capacity to DynamoDB), follow your typical development processes for the code changes. Remember to commit the statefile after you apply the changes!
+
+## Using the backend
+
+After provisioning the S3 bucket and the DynamoDB table, you need to tell Terraform that it exists and to use it. You do so by defining a backend. You can create a file called `terraform.tf` in your directory's root.
+
+```hcl
+terraform {
+  required_version = "~> 0.12"
+
+  backend "s3" {
+    bucket         = "bucket-name"
+    key            = "path-to/terraform.tfstate"
+    dynamodb_table = "terraform-state-lock"
+    region         = "region"
+    encrypt        = "true"
+  }
+}
+```
+
+`bucket` exists in the generated `$tfvars_file` from the `bootstrap` script's execution. Region also exists in that file or you passed it in the initial execution of the `bootstrap` script. The `key` is the path to the `terraform.tfstate` from the execution of the `bootstrap` script.
