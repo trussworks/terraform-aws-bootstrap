@@ -19,7 +19,7 @@ If you are running your `aws` commands via [aws-vault](https://github.com/99desi
 Run the `bootstrap` script, specifying your AWS account alias and region:
 
 ```sh
-./bootstrap my-account-alias us-west-2
+./bootstrap my-account-alias region
 ```
 
 The account alias will be configured (if not set), the resources will be created, and a git commit will be made with the tfvars and state files. Push those changes to your repo.

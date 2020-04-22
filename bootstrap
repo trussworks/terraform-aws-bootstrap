@@ -16,8 +16,8 @@ set -u
 readonly account_alias=$1
 readonly region=$2
 
-readonly state_bucket=${account_alias}-terraform-state-${region}
-readonly logging_bucket=${account_alias}-terraform-state-logs-${region}
+readonly state_bucket=${account_alias}-tf-state-${region}
+readonly logging_bucket=${account_alias}-tf-state-log-${region}
 readonly tfvars_file=terraform.tfvars
 
 # If you are running this with aws-vault and using sessions so you can

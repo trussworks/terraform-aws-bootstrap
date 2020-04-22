@@ -4,7 +4,7 @@ variable "region" {
 }
 
 variable "state_bucket" {
-  description = "S3 bucket to store Terraform state in ."
+  description = "S3 bucket to store Terraform state in."
   type        = string
 }
 
