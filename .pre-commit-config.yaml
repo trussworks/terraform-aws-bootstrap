@@ -21,3 +21,8 @@ repos:
     hooks:
       - id: terraform_docs
       - id: terraform_fmt
+
+  - repo: git://github.com/detailyang/pre-commit-shell
+    rev: 1.0.5
+    hooks:
+      - id: shell-lint
