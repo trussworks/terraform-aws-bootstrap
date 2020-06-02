@@ -23,6 +23,8 @@ region=us-west-2
 output=json
 ```
 
+You can find the ARN for your `OrganizationAccountAccessRole` in the AWS Console on the [AWS Organizations Page](https://console.aws.amazon.com/organizations/home?#/accounts).
+
 If your `aws` commands run via [aws-vault](https://github.com/99designs/aws-vault) and you are using root credentials, you'll need to set the `--no-session` flag so the IAM operations can run without being MFA'd. If you're using the [Truss aws-vault-wrapper](https://github.com/trussworks/terraform-layout-example/blob/master/bin/aws-vault-wrapper) you can set the `AWS_VAULT_NO_SESSION` environment variable. If you don't do this you'll receive an `InvalidClientTokenId` error.
 
 ```sh
