@@ -12,7 +12,22 @@ If the AWS account you are using already has a Terraform state bucket and lockin
 
 Copy the code in this repo to where your Terraform config will live. For example, it could live in a directory like `terraform/account-alias/bootstrap`.
 
+You'll need to follow our [AWS Account Structure](https://github.com/trussworks/legendary-waddle/blob/master/README.md#aws-account-structure) to create an account alias. Make sure you're accessesing the existing `OrganizationAccountAccessRole` to bootstrap your account. The profile in your `.aws/config` should look something like this:
+
+```sh
+[profile trussworks-rosa]
+source_profile=trussworks-org-root
+mfa_serial=arn:aws:iam::11111111111:mfa/rosa.org-root
+role_arn=arn:aws:iam::22222222222:role/OrganizationAccountAccessRole
+region=us-west-2
+output=json
+```
+
 If your `aws` commands run via [aws-vault](https://github.com/99designs/aws-vault) and you are using root credentials, you'll need to set the `--no-session` flag so the IAM operations can run without being MFA'd. If you're using the [Truss aws-vault-wrapper](https://github.com/trussworks/terraform-layout-example/blob/master/bin/aws-vault-wrapper) you can set the `AWS_VAULT_NO_SESSION` environment variable. If you don't do this you'll receive an `InvalidClientTokenId` error.
+
+```sh
+AWS_VAULT_NO_SESSION=true
+```
 
 If you are running your `aws` commands via [aws-vault](https://github.com/99designs/aws-vault) and are using a role assumption, you will want to run this script without `AWS_VAULT_NO_SESSION`. The role assumption between different profiles requires session behavior. Additionally, this script will attempt to run `aws s3 ls` before checking for bucket existence so that you can create a session token that may require an MFA handshake.
 
