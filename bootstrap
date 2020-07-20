@@ -13,6 +13,23 @@ usage() {
 [[ -z $1 || -z $2 ]] && usage
 set -u
 
+# This repo is a template to be cloned into other repos
+# When it is used several files should be removed that are part of the repo but should not be included
+# in the new repo. This section asks if the user want's to remove the files.
+if [ -d .git ]; then
+    while true; do
+      read -rp "Do you wish to remove the template repo's config files before continuing? " yn
+      case $yn in
+        [Yy]* )
+            echo "Removing files: .git LICENSE .circleci .gitignore .markdownlintrc .pre-commit-config.yaml"
+            rm -rf .git LICENSE .circleci .gitignore .markdownlintrc .pre-commit-config.yaml
+            break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+      esac
+    done
+fi
+
 readonly account_alias=$1
 readonly region=$2
 
