@@ -18,7 +18,7 @@ Terraform 0.12. Pin module version to latest. Submit pull-requests to master bra
 ```hcl
 module "bootstrap" {
   region        = "us-west-2"
-  account_alias = "<ORG>-<NAME>
+  account_alias = "<ORG>-<NAME>"
 }
 ```
 
@@ -81,7 +81,7 @@ terraform init && terraform plan
 terraform apply
 ```
 
-The account alias will be configured (if not set), the resources will be created, and a git commit will be made with the tfvars and state files. Push those changes to your repo.
+The account alias will be configured (if not set), the resources will be created, and a state file will be generated. Commit the state file and the terraform code. Push those changes to your repo.
 
 ## Subsequent changes
 
