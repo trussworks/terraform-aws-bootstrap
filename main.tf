@@ -2,10 +2,20 @@
 # Terraform state bucket
 #
 
+locals {
+  state_bucket   = "${var.account_alias}-terraform-state-${var.region}"
+  logging_bucket = "${var.account_alias}-terraform-state-logs-${var.region}"
+}
+
+resource "aws_iam_account_alias" "alias" {
+  account_alias = var.account_alias
+}
+
 module "terraform_state_bucket" {
-  source         = "trussworks/s3-private-bucket/aws"
-  version        = "~> 2.0"
-  bucket         = var.state_bucket
+  source  = "trussworks/s3-private-bucket/aws"
+  version = "2.0.10"
+
+  bucket         = local.state_bucket
   logging_bucket = module.terraform_state_bucket_logs.aws_logs_bucket
 
   use_account_alias_prefix = false
@@ -21,12 +31,11 @@ module "terraform_state_bucket" {
 
 module "terraform_state_bucket_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 8.0"
-  region  = var.region
+  version = "8.0.0"
 
-  s3_bucket_name = var.logging_bucket
-
-  default_allow = false
+  region         = var.region
+  s3_bucket_name = local.logging_bucket
+  default_allow  = false
 }
 
 #
