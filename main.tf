@@ -3,8 +3,8 @@
 #
 
 locals {
-  state_bucket   = "${var.account_alias}-terraform-state-${var.region}"
-  logging_bucket = "${var.account_alias}-terraform-state-logs-${var.region}"
+  state_bucket   = "${var.account_alias}-tf-state-${var.region}"
+  logging_bucket = "${var.account_alias}-tf-state-logs-${var.region}"
 }
 
 resource "aws_iam_account_alias" "alias" {
