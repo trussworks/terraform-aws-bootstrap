@@ -65,7 +65,7 @@ Set up your `bootstrap/main.tf` file to look like the example above. Don't forge
 ```hcl
 provider "aws" {
   version = "~> 2.70.0"
-  region  = var.region
+  region  = local.region
 }
 
 provider "template" {
