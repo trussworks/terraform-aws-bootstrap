@@ -7,8 +7,6 @@ jobs:
   test:
     docker:
       - image: *circleci_docker_primary
-        environment:
-          - TEST_RESULTS: /tmp/test-results
     steps:
       - checkout
       - restore_cache:
