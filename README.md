@@ -17,6 +17,8 @@ Terraform 0.12. Pin module version to latest. Submit pull-requests to master bra
 
 ```hcl
 module "bootstrap" {
+  source = "terraform/bootstrap/aws"
+
   region        = "us-west-2"
   account_alias = "<ORG>-<NAME>"
 }
