@@ -4,7 +4,7 @@ references:
   circleci_docker_primary: &circleci_docker_primary trussworks/circleci-docker-primary:683f06a3c6b20ba8696a09632c1c26a532df5bf5
 
 jobs:
-  test:
+  validate:
     docker:
       - image: *circleci_docker_primary
     steps:
@@ -22,4 +22,4 @@ workflows:
   version: 2
   validate:
     jobs:
-      - test
+      - validate
