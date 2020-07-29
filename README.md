@@ -104,3 +104,83 @@ terraform {
 ```
 
 `bucket` exists in the generated `$tfvars_file` from the `bootstrap` script's execution. Region also exists in that file or you passed it in the initial execution of the `bootstrap` script. The `key` is the path to the `terraform.tfstate` from the execution of the `bootstrap` script.
+
+## Upgrade Path
+
+### Pre-module releast to v0.1.1
+
+To update from the pre-module release code that cloned this repo to the module release you'll need to do a few things:
+
+1. Remove files that are no longer needed:
+
+```sh
+rm -f README.md bootstrap terraform.tfvars variables.tf versions.tf
+```
+
+1. Modify the `main.tf` to look like this:
+
+```hcl
+locals {
+  region = "us-west-2"
+}
+
+module "bootstrap" {
+  source  = "trussworks/bootstrap/aws"
+  version = "~> 0.1.1"
+
+  account_alias = "<ORG>-<NAME>"
+  region        = local.region
+}
+```
+
+1. Modify the `providers.tf` to look like this:
+
+```hcl
+provider "aws" {
+  version = "~> 2.70.0"
+  region  = local.region
+}
+```
+
+1. Re-initialize the module and then get the terraform plan:
+
+
+```sh
+terraform init
+terraform plan
+```
+
+1. Import the AWS account alias and then move the terraform state to the new namespaces.
+
+```sh
+terraform import module.bootstrap.aws_iam_account_alias.alias trussworks-cgilmer
+terraform state mv aws_dynamodb_table.terraform_state_lock module.bootstrap.aws_dynamodb_table.terraform_state_lock
+terraform state mv module.terraform_state_bucket.aws_s3_bucket.private_bucket module.bootstrap.module.terraform_state_bucket.aws_s3_bucket.private_bucket
+terraform state mv module.terraform_state_bucket.aws_s3_bucket_analytics_configuration.private_analytics_config[0] module.bootstrap.module.terraform_state_bucket.aws_s3_bucket_analytics_configuration.private_analytics_config[0]
+terraform state mv module.terraform_state_bucket.aws_s3_bucket_public_access_block.public_access_block module.bootstrap.module.terraform_state_bucket.aws_s3_bucket_public_access_block.public_access_block
+terraform state mv module.terraform_state_bucket_logs.aws_s3_bucket.aws_logs module.bootstrap.module.terraform_state_bucket_logs.aws_s3_bucket.aws_logs
+terraform state mv module.terraform_state_bucket_logs.aws_s3_bucket_public_access_block.public_access_block[0] module.bootstrap.module.terraform_state_bucket_logs.aws_s3_bucket_public_access_block.public_access_block[0]
+```
+
+1. Verify the changes result in no modification to the terraform plan:
+
+```sh
+terraform plan
+```
+
+Output should look like this if you are successful:
+
+```text
+No changes. Infrastructure is up-to-date.
+
+This means that Terraform did not detect any differences between your
+configuration and real physical resources that exist. As a result, no
+actions need to be performed.
+```
+
+1. Finally, commit your code and create a PR.
+
+```sh
+git checkout -b update_bootstrap_for_<ORG>_<NAME>
+git commit -am"Update the bootstrap stack to use the bootstrap terraform module"
+```
