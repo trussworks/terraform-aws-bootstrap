@@ -10,6 +10,6 @@ variable "account_alias" {
 
 variable "log_retention" {
   description = "Log retention of access logs of state bucket."
-  default = 731
+  default     = 731
   type        = number
 }
