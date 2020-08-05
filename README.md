@@ -42,6 +42,7 @@ module "bootstrap" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | account\_alias | The desired AWS account alias. | `string` | n/a | yes |
+| log\_retention | Log retention of access logs of state bucket. | `number` | `90` | no |
 | region | AWS region. | `string` | n/a | yes |
 
 ## Outputs
