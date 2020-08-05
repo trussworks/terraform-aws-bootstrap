@@ -36,6 +36,7 @@ module "terraform_state_bucket_logs" {
   region         = var.region
   s3_bucket_name = local.logging_bucket
   default_allow  = false
+  s3_log_bucket_retention = var.log_retention
 }
 
 #
