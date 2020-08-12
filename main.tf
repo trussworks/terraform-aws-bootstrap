@@ -3,8 +3,8 @@
 #
 
 locals {
-  state_bucket   = "${var.account_alias}-tf-state-${var.region}"
-  logging_bucket = "${var.account_alias}-tf-state-log-${var.region}"
+  state_bucket   = "${var.account_alias}-${var.bucket_purpose}-${var.region}"
+  logging_bucket = "${var.account_alias}-${var.bucket_purpose}-${var.log_name}-${var.region}"
 }
 
 resource "aws_iam_account_alias" "alias" {

@@ -42,6 +42,8 @@ module "bootstrap" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | account\_alias | The desired AWS account alias. | `string` | n/a | yes |
+| bucket\_purpose | Name to identify the bucket's purpose | `string` | `"tf-state"` | no |
+| log\_name | Log name (for backwards compatibility this can be modified to logs) | `string` | `"log"` | no |
 | log\_retention | Log retention of access logs of state bucket. | `number` | `90` | no |
 | region | AWS region. | `string` | n/a | yes |
 
