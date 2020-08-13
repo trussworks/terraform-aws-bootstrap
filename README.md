@@ -29,7 +29,7 @@ module "bootstrap" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
+| terraform | ~> 0.12.0 |
 
 ## Providers
 
