@@ -11,7 +11,9 @@ If the AWS account you are using already has a Terraform state bucket and lockin
 
 ## Terraform Versions
 
-Terraform 0.12. Pin module version to latest. Submit pull-requests to master branch.
+Terraform 0.13. Pin module version to latest. Submit pull-requests to master branch.
+
+Terraform 0.12. Pin module version to latest. Submit pull-requests to terraform012 branch.
 
 ## Usage for bootstrapping
 
