@@ -13,7 +13,7 @@ resource "aws_iam_account_alias" "alias" {
 
 module "terraform_state_bucket" {
   source  = "trussworks/s3-private-bucket/aws"
-  version = "~> 2.0.10"
+  version = "~> 3.0.0"
 
   bucket         = local.state_bucket
   logging_bucket = module.terraform_state_bucket_logs.aws_logs_bucket
@@ -31,9 +31,8 @@ module "terraform_state_bucket" {
 
 module "terraform_state_bucket_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 8.0.1"
+  version = "~> 10.0.0"
 
-  region                  = var.region
   s3_bucket_name          = local.logging_bucket
   default_allow           = false
   s3_log_bucket_retention = var.log_retention
