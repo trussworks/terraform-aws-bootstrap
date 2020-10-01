@@ -13,7 +13,7 @@ If the AWS account you are using already has a Terraform state bucket and lockin
 
 Terraform 0.13. Pin module version to latest. Submit pull-requests to master branch.
 
-Terraform 0.12. Pin module version to latest. Submit pull-requests to terraform012 branch.
+Terraform 0.12. Pin module version to v0.1.4. Submit pull-requests to terraform012 branch.
 
 ## Usage for bootstrapping
 
@@ -72,7 +72,7 @@ Set up your `bootstrap/main.tf` file to look like the example above. Don't forge
 
 ```hcl
 provider "aws" {
-  version = "~> 2.70.0"
+  version = "~> 3.0"
   region  = local.region
 }
 ```
@@ -97,7 +97,7 @@ After provisioning the S3 bucket and the DynamoDB table, you need to tell Terraf
 
 ```hcl
 terraform {
-  required_version = "~> 0.12"
+  required_version = "~> 0.13"
 
   backend "s3" {
     bucket         = "bucket-name"
@@ -113,7 +113,7 @@ terraform {
 
 ## Upgrade Path
 
-### Pre-module releast to v0.1.1
+### Pre-module release to v0.1.1
 
 To update from the pre-module release code that cloned this repo to the module release you'll need to do a few things:
 
