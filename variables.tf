@@ -1,3 +1,18 @@
+variable "dynamodb_table_name" {
+  description = "Name of the DynamoDB Table for locking Terraform state."
+  default     = "terraform-state-lock"
+  type        = string
+}
+
+variable "dynamodb_table_tags" {
+  description = "Tags of the DynamoDB Table for locking Terraform state."
+  default = {
+    Name       = "terraform-state-lock"
+    Automation = "Terraform"
+  }
+  type = map(string)
+}
+
 variable "region" {
   description = "AWS region."
   type        = string
