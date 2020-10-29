@@ -43,7 +43,7 @@ module "terraform_state_bucket_logs" {
 #
 
 resource "aws_dynamodb_table" "terraform_state_lock" {
-  name           = "terraform-state-lock"
+  name           = var.dynamodb_table_name
   hash_key       = "LockID"
   read_capacity  = 2
   write_capacity = 2
@@ -57,9 +57,5 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
     type = "S"
   }
 
-  tags = {
-    Name       = "terraform-state-lock"
-    Automation = "Terraform"
-  }
+  tags = var.dynamodb_table_tags
 }
-
