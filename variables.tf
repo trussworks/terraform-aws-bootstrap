@@ -40,3 +40,9 @@ variable "log_name" {
   default     = "log"
   type        = string
 }
+
+variable "log_bucket_versioning" {
+  description = "Bool for toggling versioning for log bucket"
+  type        = bool
+  default     = false
+}

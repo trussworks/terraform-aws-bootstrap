@@ -48,6 +48,7 @@ module "bootstrap" {
 | bucket\_purpose | Name to identify the bucket's purpose | `string` | `"tf-state"` | no |
 | dynamodb\_table\_name | Name of the DynamoDB Table for locking Terraform state. | `string` | `"terraform-state-lock"` | no |
 | dynamodb\_table\_tags | Tags of the DynamoDB Table for locking Terraform state. | `map(string)` | <pre>{<br>  "Automation": "Terraform",<br>  "Name": "terraform-state-lock"<br>}</pre> | no |
+| log\_bucket\_versioning | Bool for toggling versioning for log bucket | `bool` | `false` | no |
 | log\_name | Log name (for backwards compatibility this can be modified to logs) | `string` | `"log"` | no |
 | log\_retention | Log retention of access logs of state bucket. | `number` | `90` | no |
 | region | AWS region. | `string` | n/a | yes |
