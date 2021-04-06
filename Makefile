@@ -6,7 +6,8 @@ ensure_pre_commit: .git/hooks/pre-commit ## Ensure pre-commit is installed
 
 .PHONY: pre_commit_tests
 pre_commit_tests: ensure_pre_commit ## Run pre-commit tests
-	pre-commit run --all-files
+	pre-commit --version
+	pre-commit run --all-files --show-diff-on-failure
 
 .PHONY: test
 test: pre_commit_tests
