@@ -20,9 +20,7 @@ module "terraform_state_bucket" {
 
   use_account_alias_prefix = false
 
-  tags = {
-    Automation = "Terraform"
-  }
+  tags = var.state_bucket_tags
 }
 
 #
