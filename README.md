@@ -66,7 +66,7 @@ module "bootstrap" {
 | <a name="input_log_name"></a> [log\_name](#input\_log\_name) | Log name (for backwards compatibility this can be modified to logs) | `string` | `"log"` | no |
 | <a name="input_log_retention"></a> [log\_retention](#input\_log\_retention) | Log retention of access logs of state bucket. | `number` | `90` | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS region. | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | default tags | `map(string)` | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | default tags | `map(string)` | <pre>{<br>  "Automation": "Terraform"<br>}</pre> | no |
 
 ## Outputs
 
