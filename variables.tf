@@ -49,6 +49,6 @@ variable "log_bucket_versioning" {
 
 variable "tags" {
   type        = map(string)
-  default     = null
+  default     = { Automation : "Terraform" }
   description = "default tags"
 }
