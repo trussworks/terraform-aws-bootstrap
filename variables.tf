@@ -46,3 +46,9 @@ variable "log_bucket_versioning" {
   type        = bool
   default     = false
 }
+
+variable "tags" {
+  type = map(string)
+  default = null
+  description = "default tags"
+}

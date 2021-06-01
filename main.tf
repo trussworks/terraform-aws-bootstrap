@@ -5,6 +5,10 @@
 locals {
   state_bucket   = "${var.account_alias}-${var.bucket_purpose}-${var.region}"
   logging_bucket = "${var.account_alias}-${var.bucket_purpose}-${var.log_name}-${var.region}"
+  common_tags = "${map(
+      "${var.opt_tag_name}", "${var.opt_tag_value}",
+      "role", "${var.role}"
+  )}"
 }
 
 resource "aws_iam_account_alias" "alias" {
@@ -20,9 +24,7 @@ module "terraform_state_bucket" {
 
   use_account_alias_prefix = false
 
-  tags = {
-    Automation = "Terraform"
-  }
+  tags = var.tags
 }
 
 #
