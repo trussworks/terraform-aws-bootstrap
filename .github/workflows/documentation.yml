@@ -1,8 +1,9 @@
 name: terraform-docs-gh-actions
 on:
-  push:
-    branches:
-      - automate-docs
+  - pull_request
+  # push:
+  #   branches:
+  #     - automate-docs
 jobs:
   docs:
     runs-on: ubuntu-latest
