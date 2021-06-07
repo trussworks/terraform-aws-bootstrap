@@ -7,7 +7,6 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: terraform-docs/gh-actions@v0.6.1
     - name: Render terraform docs inside the USAGE.md and push changes back to PR branch
       uses: terraform-docs/gh-actions@v0.6.1
       with:
