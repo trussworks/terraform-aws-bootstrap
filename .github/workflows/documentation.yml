@@ -5,6 +5,7 @@ on:
       - automate-docs
 jobs:
   docs:
+    runs-on: ubuntu-latest
     steps:
     - uses: terraform-docs/gh-actions@v0.6.1
       with:
