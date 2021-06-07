@@ -21,3 +21,4 @@ jobs:
         output-file: USAGE.md
         output-method: inject
         git-push: "true"
+        template: #Usage<br><br><!--- BEGIN\_TF\_DOCS ---><br><!--- END\_TF\_DOCS ---><br>
