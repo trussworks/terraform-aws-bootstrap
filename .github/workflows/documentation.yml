@@ -6,6 +6,9 @@ on:
 jobs:
   docs:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
     steps:
     - name: Render terraform docs inside the USAGE.md and push changes back to PR branch
       uses: terraform-docs/gh-actions@v0.6.1
