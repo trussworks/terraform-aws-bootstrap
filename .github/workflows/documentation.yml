@@ -13,7 +13,7 @@ jobs:
     - name: checkout project
       uses: actions/checkout@v2
       with:
-        ref: master
+        ref: automate-docs
     - name: Render terraform docs inside the USAGE.md and push changes back to PR branch
       uses: terraform-docs/gh-actions@v0.6.1
       with:
