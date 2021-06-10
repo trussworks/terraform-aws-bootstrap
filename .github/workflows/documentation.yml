@@ -10,8 +10,6 @@ jobs:
     steps:
     - name: checkout project
       uses: actions/checkout@v2
-      with:
-        ref: automate-docs
     - name: Render terraform docs inside the README.md and push changes back to branch
       uses: terraform-docs/gh-actions@v0.6.1
       with:
