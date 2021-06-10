@@ -25,12 +25,10 @@ module "bootstrap" {
   account_alias = "<ORG>-<NAME>"
 }
 ```
-##Usage
 
+<!--- BEGIN_TF_DOCS --->
 
-<!--- BEGIN TF DOCS --->
-
-<!--- END TF DOCS --->
+<!--- END_TF_DOCS --->
 
 ## Bootstrapping
 
