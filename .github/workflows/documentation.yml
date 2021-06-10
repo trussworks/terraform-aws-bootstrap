@@ -16,7 +16,7 @@ jobs:
       uses: terraform-docs/gh-actions@v0.6.1
       with:
         working-dir: .
-        output-file: USAGE.md
+        output-file: README.md
         output-method: inject
         git-push: "true"
-        #template: #Usage<br><br><!--- BEGIN\_TF\_DOCS ---><br><!--- END\_TF\_DOCS ---><br>
+        template: #<br><!--- BEGIN\_TF\_DOCS ---><br><!--- END\_TF\_DOCS ---><br>

@@ -26,7 +26,7 @@ module "bootstrap" {
 }
 ```
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN TF DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -75,7 +75,7 @@ module "bootstrap" {
 | <a name="output_dynamodb_table"></a> [dynamodb\_table](#output\_dynamodb\_table) | The name of the dynamo db table |
 | <a name="output_logging_bucket"></a> [logging\_bucket](#output\_logging\_bucket) | The logging\_bucket name |
 | <a name="output_state_bucket"></a> [state\_bucket](#output\_state\_bucket) | The state\_bucket name |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END TF DOCS -->
 
 ## Bootstrapping
 
