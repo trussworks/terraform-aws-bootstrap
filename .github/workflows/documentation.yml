@@ -1,0 +1,21 @@
+name: terraform-docs-gh-actions
+on:
+  - pull_request
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+    - name: checkout project
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+    - name: Render terraform docs inside the README.md and push changes back to branch
+      uses: terraform-docs/gh-actions@v0.6.1
+      with:
+        working-dir: .
+        output-file: README.md
+        output-method: inject
+        git-push: "true"
