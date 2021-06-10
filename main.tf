@@ -20,7 +20,7 @@ module "terraform_state_bucket" {
 
   use_account_alias_prefix = false
 
-  tags = var.state_bucket_tags_1
+  tags = var.state_bucket_tags
 }
 
 #
