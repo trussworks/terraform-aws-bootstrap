@@ -1,6 +1,5 @@
 name: terraform-docs-gh-actions
-on:
-  - pull_request
+on: [pull_request, pull_request_target]
 jobs:
   docs:
     runs-on: ubuntu-latest
