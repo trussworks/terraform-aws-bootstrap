@@ -111,7 +111,7 @@ The `bootstrap` script should only be used for the initial setup. If you need to
 
 ## Contributing
 
-To submit a PR, fork the repo and enable Github Actions. Enabling Github Actions is necessary to update terraform docs. To enable Github Actions, navigate to the actions tab. The user has to explicitly enable GitHub Actions - Github will not automatically enable this for the user.
+To submit a PR, fork the repo and enable Github Actions. Enabling Github Actions is necessary to update terraform docs. To enable Github Actions, navigate to the actions tab in the forked repo. This step must be done manually - Github will not automatically enable this.
 
 ## Using the backend
 
