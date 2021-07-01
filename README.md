@@ -44,7 +44,7 @@ module "bootstrap" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_terraform_state_bucket"></a> [terraform\_state\_bucket](#module\_terraform\_state\_bucket) | trussworks/s3-private-bucket/aws | ~> 3.3.0 |
+| <a name="module_terraform_state_bucket"></a> [terraform\_state\_bucket](#module\_terraform\_state\_bucket) | trussworks/s3-private-bucket/aws | ~> 3.6.0 |
 | <a name="module_terraform_state_bucket_logs"></a> [terraform\_state\_bucket\_logs](#module\_terraform\_state\_bucket\_logs) | trussworks/logs/aws | ~> 10.3.0 |
 
 ## Resources
