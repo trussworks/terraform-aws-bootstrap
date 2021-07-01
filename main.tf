@@ -20,7 +20,8 @@ module "terraform_state_bucket" {
 
   use_account_alias_prefix = false
 
-  tags = var.state_bucket_tags
+  enable_s3_public_access_block = var.enable_s3_public_access_block
+  tags                          = var.state_bucket_tags
 }
 
 #
