@@ -110,6 +110,10 @@ The account alias will be configured (if not set), the resources will be created
 
 The `bootstrap` script should only be used for the initial setup. If you need to make any changes to the Terraform code (e.g. adding capacity to DynamoDB), follow your typical development processes for the code changes. Remember to commit the statefile after you apply the changes!
 
+## Contributing
+
+To submit a PR, fork the repo and enable Github Actions. Enabling Github Actions is necessary to update terraform docs. To enable Github Actions, navigate to the actions tab in the forked repo. This step must be done manually - Github will not automatically enable this.
+
 ## Using the backend
 
 After provisioning the S3 bucket and the DynamoDB table, you need to tell Terraform that it exists and to use it. You do so by defining a backend. You can create a file called `terraform.tf` in your directory's root.
