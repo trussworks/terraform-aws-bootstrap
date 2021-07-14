@@ -53,6 +53,12 @@ variable "state_bucket_tags" {
   description = "Tags to associate with the bucket storing the Terraform state files"
 }
 
+variable "enable_s3_public_access_block" {
+  description = "Bool for toggling whether the s3 public access block resource should be enabled."
+  type        = bool
+  default     = true
+}
+
 variable "point_in_time_recovery" {
   type        = bool
   default     = false
