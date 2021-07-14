@@ -44,7 +44,7 @@ module "bootstrap" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_terraform_state_bucket"></a> [terraform\_state\_bucket](#module\_terraform\_state\_bucket) | trussworks/s3-private-bucket/aws | ~> 3.3.0 |
+| <a name="module_terraform_state_bucket"></a> [terraform\_state\_bucket](#module\_terraform\_state\_bucket) | trussworks/s3-private-bucket/aws | ~> 3.6.0 |
 | <a name="module_terraform_state_bucket_logs"></a> [terraform\_state\_bucket\_logs](#module\_terraform\_state\_bucket\_logs) | trussworks/logs/aws | ~> 10.3.0 |
 
 ## Resources
@@ -62,6 +62,7 @@ module "bootstrap" {
 | <a name="input_bucket_purpose"></a> [bucket\_purpose](#input\_bucket\_purpose) | Name to identify the bucket's purpose | `string` | `"tf-state"` | no |
 | <a name="input_dynamodb_table_name"></a> [dynamodb\_table\_name](#input\_dynamodb\_table\_name) | Name of the DynamoDB Table for locking Terraform state. | `string` | `"terraform-state-lock"` | no |
 | <a name="input_dynamodb_table_tags"></a> [dynamodb\_table\_tags](#input\_dynamodb\_table\_tags) | Tags of the DynamoDB Table for locking Terraform state. | `map(string)` | <pre>{<br>  "Automation": "Terraform",<br>  "Name": "terraform-state-lock"<br>}</pre> | no |
+| <a name="input_enable_s3_public_access_block"></a> [enable\_s3\_public\_access\_block](#input\_enable\_s3\_public\_access\_block) | Bool for toggling whether the s3 public access block resource should be enabled. | `bool` | `true` | no |
 | <a name="input_log_bucket_versioning"></a> [log\_bucket\_versioning](#input\_log\_bucket\_versioning) | Bool for toggling versioning for log bucket | `bool` | `false` | no |
 | <a name="input_log_name"></a> [log\_name](#input\_log\_name) | Log name (for backwards compatibility this can be modified to logs) | `string` | `"log"` | no |
 | <a name="input_log_retention"></a> [log\_retention](#input\_log\_retention) | Log retention of access logs of state bucket. | `number` | `90` | no |
@@ -108,6 +109,10 @@ The account alias will be configured (if not set), the resources will be created
 ## Subsequent changes
 
 The `bootstrap` script should only be used for the initial setup. If you need to make any changes to the Terraform code (e.g. adding capacity to DynamoDB), follow your typical development processes for the code changes. Remember to commit the statefile after you apply the changes!
+
+## Contributing
+
+To submit a PR, fork the repo and enable Github Actions. Enabling Github Actions is necessary to update terraform docs. To enable Github Actions, navigate to the actions tab in the forked repo. This step must be done manually - Github will not automatically enable this.
 
 ## Using the backend
 
