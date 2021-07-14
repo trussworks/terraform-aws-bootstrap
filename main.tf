@@ -41,6 +41,7 @@ module "terraform_state_bucket_logs" {
 # Terraform state locking
 #
 
+#tfsec:ignore:AWS086
 resource "aws_dynamodb_table" "terraform_state_lock" {
   name           = var.dynamodb_table_name
   hash_key       = "LockID"
@@ -57,7 +58,7 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
   }
 
   point_in_time_recovery {
-    enabled = true
+    enabled = var.point_in_time_recovery
   }
 
   tags = var.dynamodb_table_tags

@@ -52,3 +52,9 @@ variable "state_bucket_tags" {
   default     = { Automation : "Terraform" }
   description = "Tags to associate with the bucket storing the Terraform state files"
 }
+
+variable "point_in_time_recovery" {
+  type        = bool
+  default     = false
+  description = "Point-in-time recovery options"
+}
