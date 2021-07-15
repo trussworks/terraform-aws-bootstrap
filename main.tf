@@ -42,6 +42,8 @@ module "terraform_state_bucket_logs" {
 # Terraform state locking
 #
 
+# Ignore warnings about point-in-time recovery since this table holds no data
+# The terraform state lock is meant to be ephemeral and does not need recovery
 #tfsec:ignore:AWS086
 resource "aws_dynamodb_table" "terraform_state_lock" {
   name           = var.dynamodb_table_name
