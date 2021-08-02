@@ -47,7 +47,7 @@ variable "log_bucket_versioning" {
   default     = false
 }
 
-variable "state_bucket_tags1" {
+variable "state_bucket_tags" {
   type        = map(string)
   default     = { Automation : "Terraform" }
   description = "Tags to associate with the bucket storing the Terraform state files"
