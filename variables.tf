@@ -4,6 +4,12 @@ variable "dynamodb_table_names" {
   type        = string
 }
 
+variable "dynamodb_table_namess" {
+  description = "Name of the DynamoDB Table for locking Terraform state."
+  default     = "terraform-state-lock"
+  type        = string
+}
+
 variable "dynamodb_table_tags" {
   description = "Tags of the DynamoDB Table for locking Terraform state."
   default = {
