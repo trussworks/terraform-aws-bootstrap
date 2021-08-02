@@ -67,7 +67,7 @@ module "bootstrap" {
 | <a name="input_log_name"></a> [log\_name](#input\_log\_name) | Log name (for backwards compatibility this can be modified to logs) | `string` | `"log"` | no |
 | <a name="input_log_retention"></a> [log\_retention](#input\_log\_retention) | Log retention of access logs of state bucket. | `number` | `90` | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS region. | `string` | n/a | yes |
-| <a name="input_state_bucket_tags1"></a> [state\_bucket\_tags1](#input\_state\_bucket\_tags1) | Tags to associate with the bucket storing the Terraform state files | `map(string)` | <pre>{<br>  "Automation": "Terraform"<br>}</pre> | no |
+| <a name="input_state_bucket_tags"></a> [state\_bucket\_tags](#input\_state\_bucket\_tags) | Tags to associate with the bucket storing the Terraform state files | `map(string)` | <pre>{<br>  "Automation": "Terraform"<br>}</pre> | no |
 
 ## Outputs
 
