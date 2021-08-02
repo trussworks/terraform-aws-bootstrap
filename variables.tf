@@ -1,4 +1,4 @@
-variable "dynamodb_table_name" {
+variable "dynamodb_table_names" {
   description = "Name of the DynamoDB Table for locking Terraform state."
   default     = "terraform-state-lock"
   type        = string
