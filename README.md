@@ -60,7 +60,9 @@ module "bootstrap" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_account_alias"></a> [account\_alias](#input\_account\_alias) | The desired AWS account alias. | `string` | n/a | yes |
 | <a name="input_bucket_purpose"></a> [bucket\_purpose](#input\_bucket\_purpose) | Name to identify the bucket's purpose | `string` | `"tf-state"` | no |
-| <a name="input_dynamodb_table_name"></a> [dynamodb\_table\_name](#input\_dynamodb\_table\_name) | Name of the DynamoDB Table for locking Terraform state. | `string` | `"terraform-state-lock"` | no |
+| <a name="input_dynamodb_table_names"></a> [dynamodb\_table\_names](#input\_dynamodb\_table\_names) | Name of the DynamoDB Table for locking Terraform state. | `string` | `"terraform-state-lock"` | no |
+| <a name="input_dynamodb_table_namess"></a> [dynamodb\_table\_namess](#input\_dynamodb\_table\_namess) | Name of the DynamoDB Table for locking Terraform state. | `string` | `"terraform-state-lock"` | no |
+| <a name="input_dynamodb_table_namesss"></a> [dynamodb\_table\_namesss](#input\_dynamodb\_table\_namesss) | Name of the DynamoDB Table for locking Terraform state. | `string` | `"terraform-state-lock"` | no |
 | <a name="input_dynamodb_table_tags"></a> [dynamodb\_table\_tags](#input\_dynamodb\_table\_tags) | Tags of the DynamoDB Table for locking Terraform state. | `map(string)` | <pre>{<br>  "Automation": "Terraform",<br>  "Name": "terraform-state-lock"<br>}</pre> | no |
 | <a name="input_enable_s3_public_access_block"></a> [enable\_s3\_public\_access\_block](#input\_enable\_s3\_public\_access\_block) | Bool for toggling whether the s3 public access block resource should be enabled. | `bool` | `true` | no |
 | <a name="input_log_bucket_versioning"></a> [log\_bucket\_versioning](#input\_log\_bucket\_versioning) | Bool for toggling versioning for log bucket | `bool` | `false` | no |
