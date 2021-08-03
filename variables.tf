@@ -58,3 +58,9 @@ variable "enable_s3_public_access_block" {
   type        = bool
   default     = true
 }
+
+variable "dynamodb_point_in_time_recovery" {
+  type        = bool
+  default     = false
+  description = "Point-in-time recovery options"
+}
