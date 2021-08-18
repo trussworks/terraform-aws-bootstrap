@@ -64,3 +64,9 @@ variable "dynamodb_point_in_time_recovery" {
   default     = false
   description = "Point-in-time recovery options"
 }
+
+variable "manage_account_alias" {
+  type        = bool
+  default     = true
+  description = "Manage the account alias as a resource. Set to 'false' if this behavior is not desired."
+}
