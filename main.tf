@@ -8,6 +8,7 @@ locals {
 }
 
 resource "aws_iam_account_alias" "alias" {
+  count         = var.manage_account_alias ? 1 : 0
   account_alias = var.account_alias
 }
 

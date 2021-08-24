@@ -137,6 +137,28 @@ terraform {
 
 ## Upgrade Path
 
+### Release v2.0.0
+
+When upgrading from v1.6.1 to v2.0.0 the terraform state must be modified to move the account alias resource:
+
+```sh
+terraform state mv module.example.aws_iam_account_alias.alias module.example.aws_iam_account_alias.alias[0]
+```
+
+If you do not want to manage the account alias with this module you can instead use a data resource
+to get the account alias and pass it into the module. Also set `manage_account_alias` to `false`.
+
+```hcl
+data "aws_iam_account_alias" "current" {}
+module "bootstrap" {
+  source = "trussworks/bootstrap/aws"
+
+  region               = "us-west-2"
+  account_alias        = data.aws_iam_account_alias.current.id
+  manage_account_alias = false
+}
+```
+
 ### Pre-module release to v0.1.1
 
 To update from the pre-module release code that cloned this repo to the module release you'll need to do a few things:
