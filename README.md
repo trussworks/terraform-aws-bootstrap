@@ -137,9 +137,9 @@ terraform {
 
 ## Upgrade Path
 
-### Release v1.7.0
+### Release v2.0.0
 
-When upgrading from v1.6.1 to v1.7.0 the terraform state must be modified to move the account alias resource:
+When upgrading from v1.6.1 to v2.0.0 the terraform state must be modified to move the account alias resource:
 
 ```sh
 terraform state mv aws_iam_account_alias.alias aws_iam_account_alias.alias[0]
