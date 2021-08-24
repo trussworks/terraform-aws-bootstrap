@@ -142,7 +142,7 @@ terraform {
 When upgrading from v1.6.1 to v2.0.0 the terraform state must be modified to move the account alias resource:
 
 ```sh
-terraform state mv aws_iam_account_alias.alias aws_iam_account_alias.alias[0]
+terraform state mv module.example.aws_iam_account_alias.alias module.example.aws_iam_account_alias.alias[0]
 ```
 
 If you do not want to manage the account alias with this module you can instead use a data resource
