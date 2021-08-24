@@ -67,6 +67,7 @@ module "bootstrap" {
 | <a name="input_log_bucket_versioning"></a> [log\_bucket\_versioning](#input\_log\_bucket\_versioning) | Bool for toggling versioning for log bucket | `bool` | `false` | no |
 | <a name="input_log_name"></a> [log\_name](#input\_log\_name) | Log name (for backwards compatibility this can be modified to logs) | `string` | `"log"` | no |
 | <a name="input_log_retention"></a> [log\_retention](#input\_log\_retention) | Log retention of access logs of state bucket. | `number` | `90` | no |
+| <a name="input_manage_account_alias"></a> [manage\_account\_alias](#input\_manage\_account\_alias) | Manage the account alias as a resource. Set to 'false' if this behavior is not desired. | `bool` | `true` | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS region. | `string` | n/a | yes |
 | <a name="input_state_bucket_tags"></a> [state\_bucket\_tags](#input\_state\_bucket\_tags) | Tags to associate with the bucket storing the Terraform state files | `map(string)` | <pre>{<br>  "Automation": "Terraform"<br>}</pre> | no |
 
