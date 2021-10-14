@@ -24,7 +24,8 @@ func TestTerraformAwsBootstrapRepo(t *testing.T) {
 
 		// Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
-			"account_alis": testName,
+			"account_alias":       testName,
+			"dynamodb_table_name": testName,
 		},
 
 		// Environment variables to set when running Terraform
