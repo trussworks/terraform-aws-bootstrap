@@ -33,7 +33,7 @@ version: 2.1
 workflows:
   validate:
     jobs:
-    - validate:
+    - terratest:
         context:
         - org-global
   version: 2
