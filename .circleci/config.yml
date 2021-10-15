@@ -7,6 +7,8 @@ jobs:
         password: $DOCKER_PASSWORD
         username: $DOCKER_USERNAME
       image: *circleci_docker
+      environment:
+        - TEST_RESULTS: /tmp/test-results
     steps:
     - checkout
     - restore_cache:
