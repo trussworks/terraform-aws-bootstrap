@@ -1,27 +1,49 @@
+references:
+  circleci_docker: &circleci_docker trussworks/circleci:21d6483d75bdad5791fb2591ad1c1ff50000f406
 jobs:
-  validate:
+  terratest:
     docker:
     - auth:
         password: $DOCKER_PASSWORD
         username: $DOCKER_USERNAME
-      image: trussworks/circleci:56d41758666174506ef9a98769e448c63acc2045
+      image: *circleci_docker
+      environment:
+        - TEST_RESULTS: /tmp/test-results
     steps:
     - checkout
     - restore_cache:
         keys:
         - pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
-    - run: make test
+        - go-mod-sources-v1-{{ checksum "go.sum" }}
+    - run:
+        command: |
+          echo 'export PATH=${PATH}:~/go/bin' >> $BASH_ENV
+          source $BASH_ENV
+        name: Adding go binaries to $PATH
+    - run: go get github.com/jstemmer/go-junit-report
+    - run:
+        command: |
+          temp_role=$(aws sts assume-role --role-arn arn:aws:iam::313564602749:role/circleci --role-session-name circleci)
+          export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq .Credentials.AccessKeyId | xargs)
+          export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq .Credentials.SecretAccessKey | xargs)
+          export AWS_SESSION_TOKEN=$(echo $temp_role | jq .Credentials.SessionToken | xargs)
+          make test
+        name: Assume role, run pre-commit and run terratest
     - save_cache:
         key: pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
         paths:
         - ~/.cache/pre-commit
-references:
-  circleci: trussworks/circleci:56d41758666174506ef9a98769e448c63acc2045
+    - save_cache:
+        key: go-mod-sources-v1-{{ checksum "go.sum" }}
+        paths:
+        - ~/go/pkg/mod
+    - store_test_results:
+        path: /tmp/test-results/gotest
 version: 2.1
 workflows:
   validate:
     jobs:
-    - validate:
+    - terratest:
         context:
         - org-global
   version: 2
