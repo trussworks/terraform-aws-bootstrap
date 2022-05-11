@@ -17,12 +17,16 @@ module "terraform_state_bucket" {
   version = "~> 4.0.0"
 
   bucket         = local.state_bucket
-  logging_bucket = module.terraform_state_bucket_logs.aws_logs_bucket
+  logging_bucket = local.logging_bucket
 
   use_account_alias_prefix = false
 
   enable_s3_public_access_block = var.enable_s3_public_access_block
   tags                          = var.state_bucket_tags
+
+  depends_on = [
+    module.terraform_state_bucket_logs
+  ]
 }
 
 #
