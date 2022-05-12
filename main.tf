@@ -14,15 +14,19 @@ resource "aws_iam_account_alias" "alias" {
 
 module "terraform_state_bucket" {
   source  = "trussworks/s3-private-bucket/aws"
-  version = "~> 3.7.0"
+  version = "~> 4.0.0"
 
   bucket         = local.state_bucket
-  logging_bucket = module.terraform_state_bucket_logs.aws_logs_bucket
+  logging_bucket = local.logging_bucket
 
   use_account_alias_prefix = false
 
   enable_s3_public_access_block = var.enable_s3_public_access_block
   tags                          = var.state_bucket_tags
+
+  depends_on = [
+    module.terraform_state_bucket_logs
+  ]
 }
 
 #
@@ -31,12 +35,14 @@ module "terraform_state_bucket" {
 
 module "terraform_state_bucket_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 11.0.0"
+  version = "~> 13.0.0"
 
   s3_bucket_name          = local.logging_bucket
   default_allow           = false
   s3_log_bucket_retention = var.log_retention
-  enable_versioning       = var.log_bucket_versioning
+  versioning_status       = var.log_bucket_versioning
+
+  tags = var.log_bucket_tags
 }
 
 #

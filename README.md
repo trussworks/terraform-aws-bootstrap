@@ -138,6 +138,50 @@ terraform {
 
 ## Upgrade Path
 
+### Release v3.0.0
+
+Version 3.x.x enables the use of version 4 of the AWS provider. Terraform provided [an upgrade path](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/version-4-upgrade) for this. To support the upgrade path, this module now includes the following additional resources:
+
+* `module.terraform_state_bucket.aws_s3_bucket_policy.private_bucket`
+* `module.terraform_state_bucket.aws_s3_bucket_acl.private_bucket`
+* `module.terraform_state_bucket.aws_s3_bucket_versioning.private_bucket`
+* `module.terraform_state_bucket.aws_s3_bucket_lifecycle_configuration.private_bucket`
+* `module.terraform_state_bucket.aws_s3_bucket_logging.private_bucket`
+* `module.terraform_state_bucket.aws_s3_bucket_server_side_encryption_configuration.private_bucket`
+* `module.terraform_state_bucket_logs.aws_s3_bucket_policy.aws_logs`
+* `module.terraform_state_bucket_logs.aws_s3_bucket_acl.aws_logs`
+* `module.terraform_state_bucket_logs.aws_s3_bucket_lifecycle_configuration.aws_logs`
+* `module.terraform_state_bucket_logs.aws_s3_bucket_server_side_encryption_configuration.aws_logs`
+* `module.terraform_state_bucket_logs.aws_s3_bucket_logging.aws_logs`
+* `module.terraform_state_bucket_logs.aws_s3_bucket_versioning.aws_logs`
+
+This module version changes the `log_bucket_versioning` variable from a boolean to a string. There are three possible values for this variable: `Enabled`, `Disabled`, and `Suspended`. If at one point versioning was enabled on your bucket, but has since been turned off, you will need to set `log_bucket_versioning` to `Suspended` rather than `Disabled`.
+
+Additionally, this version of the module requires a minimum AWS provider version of 3.75, so that you can remain on the 3.x AWS provider while still gaining the ability to utilize the new S3 resources introduced in the 4.x AWS provider.
+
+There are two general approaches to performing this upgrade:
+
+1. Upgrade the module version and run `terraform plan` followed by `terraform apply`, which will create the new Terraform resources.
+1. Perform `terraform import` commands, which accomplishes the same thing without running `terraform apply`. This is the more cautious route.
+
+If you choose to take the route of running `terraform import`, you will need to perform the following imports. Replace `example` with the name you're using when calling this module and replace `your-bucket-name-here` with the name of your bucket (as opposed to an S3 bucket ARN). Replace `your-logging-bucket-name-here` with the name of your logging bucket. Also note the inclusion of `,private` when importing the new `module.terraform_state_bucket.aws_s3_bucket_acl.private_bucket` Terraform resource and the inclusion of `,log-delivery-write` when importing the new `module.terraform_state_bucket_logs.aws_s3_bucket_acl.aws_logs` Terraform resource.
+
+```sh
+terraform import module.example.module.terraform_state_bucket.aws_s3_bucket_policy.private_bucket your-bucket-name-here
+terraform import module.example.module.terraform_state_bucket.aws_s3_bucket_acl.private_bucket your-bucket-name-here,private
+terraform import module.example.module.terraform_state_bucket.aws_s3_bucket_versioning.private_bucket your-bucket-name-here
+terraform import module.example.module.terraform_state_bucket.aws_s3_bucket_lifecycle_configuration.private_bucket your-bucket-name-here
+terraform import module.example.module.terraform_state_bucket.aws_s3_bucket_server_side_encryption_configuration.private_bucket your-bucket-name-here
+terraform import 'module.example.module.terraform_state_bucket.aws_s3_bucket_logging.private_bucket[0]' your-bucket-name-here
+terraform import module.example.module.terraform_state_bucket_logs.aws_s3_bucket_policy.aws_logs your-logging-bucket-name-here
+terraform import module.example.module.terraform_state_bucket_logs.aws_s3_bucket_acl.aws_logs your-logging-bucket-name-here,log-delivery-write
+terraform import module.example.module.terraform_state_bucket_logs.aws_s3_bucket_lifecycle_configuration.aws_logs your-logging-bucket-name-here
+terraform import module.example.module.terraform_state_bucket_logs.aws_s3_bucket_server_side_encryption_configuration.aws_logs your-logging-bucket-name-here
+terraform import module.example.module.terraform_state_bucket_logs.aws_s3_bucket_versioning.aws_logs your-logging-bucket-name-here
+```
+
+After this, you will need to run a `terraform plan` and `terraform apply` to apply some non-functional changes to lifecycle rule IDs.
+
 ### Release v2.0.0
 
 When upgrading from v1.6.1 to v2.0.0 the terraform state must be modified to move the account alias resource:

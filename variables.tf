@@ -42,15 +42,25 @@ variable "log_name" {
 }
 
 variable "log_bucket_versioning" {
-  description = "Bool for toggling versioning for log bucket"
-  type        = bool
-  default     = false
+  description = "A string that indicates the versioning status for the log bucket."
+  default     = "Disabled"
+  type        = string
+  validation {
+    condition     = contains(["Enabled", "Disabled", "Suspended"], var.log_bucket_versioning)
+    error_message = "Valid values for versioning_status are Enabled, Disabled, or Suspended."
+  }
 }
 
 variable "state_bucket_tags" {
   type        = map(string)
   default     = { Automation : "Terraform" }
   description = "Tags to associate with the bucket storing the Terraform state files"
+}
+
+variable "log_bucket_tags" {
+  type        = map(string)
+  default     = { Automation : "Terraform" }
+  description = "Tags to associate with the bucket storing the Terraform state bucket logs"
 }
 
 variable "enable_s3_public_access_block" {
