@@ -1,0 +1,14 @@
+name: terratest
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terratest:
+    uses: trussworks/shared-actions/.github/workflows/terratest.yml@main
+    secrets: inherit
