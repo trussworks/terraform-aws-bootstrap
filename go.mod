@@ -2,7 +2,7 @@ module github.com/trussworks/terraform-aws-bootstrap
 
 go 1.19
 
-require github.com/gruntwork-io/terratest v0.40.18
+require github.com/gruntwork-io/terratest v0.40.24
 
 require (
 	cloud.google.com/go v0.83.0 // indirect
