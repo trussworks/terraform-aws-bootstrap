@@ -80,3 +80,15 @@ variable "manage_account_alias" {
   default     = true
   description = "Manage the account alias as a resource. Set to 'false' if this behavior is not desired."
 }
+
+variable "kms_master_key_id" {
+  type        = string
+  default     = null
+  description = "The AWS KMS master key ID used for the SSE-KMS encryption of the state bucket."
+}
+
+variable "bucket_key_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether or not to use Amazon S3 Bucket Keys for SSE-KMS."
+}
