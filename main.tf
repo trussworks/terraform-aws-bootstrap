@@ -20,7 +20,7 @@ module "terraform_state_bucket" {
   logging_bucket = local.logging_bucket
 
   use_account_alias_prefix = false
-  bucket_key_enabled       = true
+  bucket_key_enabled       = var.bucket_key_enabled
   kms_master_key_id        = var.kms_master_key_id
   sse_algorithm            = var.kms_master_key_id != null ? "aws:kms" : null
 
