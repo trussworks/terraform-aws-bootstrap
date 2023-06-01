@@ -92,6 +92,7 @@ If your `aws` commands run via [aws-vault](https://github.com/99designs/aws-vaul
 If you are running your `aws` commands via [aws-vault](https://github.com/99designs/aws-vault) and are using a role assumption, you will want to run this script without `AWS_VAULT_NO_SESSION`. The role assumption between different profiles requires session behavior. Additionally, this script will attempt to run `aws s3 ls` before checking for bucket existence so that you can create a session token that may require an MFA handshake.
 
 Set up your `bootstrap/main.tf` file to look like the example above. Don't forget to include a `providers.tf` file that looks like this:
+
 ```hcl
 provider "aws" {
   version = "~> 3.0"
