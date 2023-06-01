@@ -88,7 +88,7 @@ variable "kms_master_key_id" {
 }
 
 variable "bucket_key_enabled" {
-  type = bool
+  type        = bool
   default     = false
   description = "Whether or not to use Amazon S3 Bucket Keys for SSE-KMS."
 }
