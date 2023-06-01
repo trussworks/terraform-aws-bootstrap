@@ -14,4 +14,5 @@ on:
 
 jobs:
   validate-tf:
-    uses: trussworks/shared-actions/.github/workflows/validate-tf.yml@main
+    uses: trussworks/shared-actions/.github/workflows/validate-tf.yml@commit-vaildate-tf
+    secrets: inherit
