@@ -9,12 +9,6 @@ This solves a 🐓 and 🥚 problem in new AWS accounts (or for AWS accounts tha
 
 If the AWS account you are using already has a Terraform state bucket and locking table, this may not be the right tool for you.
 
-## Terraform Versions
-
-Terraform 0.13 and higher. Pin module version to latest. Submit pull-requests to master branch.
-
-Terraform 0.12. Pin module version to v0.1.4. Submit pull-requests to terraform012 branch.
-
 ## Usage for bootstrapping
 
 ```hcl
@@ -31,7 +25,7 @@ module "bootstrap" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.13.0 |
+| terraform | >= 1.0 |
 | aws | >= 3.75.0 |
 
 ## Providers
