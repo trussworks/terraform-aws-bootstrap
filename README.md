@@ -38,7 +38,7 @@ module "bootstrap" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| terraform\_state\_bucket | trussworks/s3-private-bucket/aws | ~> 4.3.0 |
+| terraform\_state\_bucket | trussworks/s3-private-bucket/aws | ~> 7.0.0 |
 | terraform\_state\_bucket\_logs | trussworks/logs/aws | ~> 14.2.0 |
 
 ## Resources
