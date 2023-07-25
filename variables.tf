@@ -83,7 +83,7 @@ variable "manage_account_alias" {
 
 variable "kms_master_key_id" {
   type        = string
-  default     = null
+  default     = ""
   description = "The AWS KMS master key ID used for the SSE-KMS encryption of the state bucket."
 }
 
