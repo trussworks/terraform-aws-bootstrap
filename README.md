@@ -38,8 +38,8 @@ module "bootstrap" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| terraform\_state\_bucket | trussworks/s3-private-bucket/aws | ~> 4.3.0 |
-| terraform\_state\_bucket\_logs | trussworks/logs/aws | ~> 14.2.0 |
+| terraform\_state\_bucket | trussworks/s3-private-bucket/aws | ~> 7.1.0 |
+| terraform\_state\_bucket\_logs | trussworks/logs/aws | ~> 16.1.0 |
 
 ## Resources
 
@@ -59,7 +59,7 @@ module "bootstrap" {
 | dynamodb\_table\_name | Name of the DynamoDB Table for locking Terraform state. | `string` | `"terraform-state-lock"` | no |
 | dynamodb\_table\_tags | Tags of the DynamoDB Table for locking Terraform state. | `map(string)` | ```{ "Automation": "Terraform", "Name": "terraform-state-lock" }``` | no |
 | enable\_s3\_public\_access\_block | Bool for toggling whether the s3 public access block resource should be enabled. | `bool` | `true` | no |
-| kms\_master\_key\_id | The AWS KMS master key ID used for the SSE-KMS encryption of the state bucket. | `string` | `null` | no |
+| kms\_master\_key\_id | The AWS KMS master key ID used for the SSE-KMS encryption of the state bucket. | `string` | `""` | no |
 | log\_bucket\_tags | Tags to associate with the bucket storing the Terraform state bucket logs | `map(string)` | ```{ "Automation": "Terraform" }``` | no |
 | log\_bucket\_versioning | A string that indicates the versioning status for the log bucket. | `string` | `"Disabled"` | no |
 | log\_name | Log name (for backwards compatibility this can be modified to logs) | `string` | `"log"` | no |

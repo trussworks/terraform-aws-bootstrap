@@ -14,7 +14,7 @@ resource "aws_iam_account_alias" "alias" {
 
 module "terraform_state_bucket" {
   source  = "trussworks/s3-private-bucket/aws"
-  version = "~> 4.3.0"
+  version = "~> 7.1.0"
 
   bucket         = local.state_bucket
   logging_bucket = local.logging_bucket
@@ -22,7 +22,6 @@ module "terraform_state_bucket" {
   use_account_alias_prefix = false
   bucket_key_enabled       = var.bucket_key_enabled
   kms_master_key_id        = var.kms_master_key_id
-  sse_algorithm            = var.kms_master_key_id != null ? "aws:kms" : null
 
   enable_s3_public_access_block = var.enable_s3_public_access_block
   tags                          = var.state_bucket_tags
@@ -38,7 +37,7 @@ module "terraform_state_bucket" {
 
 module "terraform_state_bucket_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 14.2.0"
+  version = "~> 16.1.0"
 
   s3_bucket_name          = local.logging_bucket
   default_allow           = false
