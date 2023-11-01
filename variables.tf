@@ -6,11 +6,8 @@ variable "dynamodb_table_name" {
 
 variable "dynamodb_table_tags" {
   description = "Tags of the DynamoDB Table for locking Terraform state."
-  default = {
-    Name       = "terraform-state-lock"
-    Automation = "Terraform"
-  }
-  type = map(string)
+  default     = {}
+  type        = map(string)
 }
 
 variable "region" {
@@ -53,13 +50,13 @@ variable "log_bucket_versioning" {
 
 variable "state_bucket_tags" {
   type        = map(string)
-  default     = { Automation : "Terraform" }
+  default     = {}
   description = "Tags to associate with the bucket storing the Terraform state files"
 }
 
 variable "log_bucket_tags" {
   type        = map(string)
-  default     = { Automation : "Terraform" }
+  default     = {}
   description = "Tags to associate with the bucket storing the Terraform state bucket logs"
 }
 
