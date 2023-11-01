@@ -57,16 +57,16 @@ module "bootstrap" {
 | bucket\_purpose | Name to identify the bucket's purpose | `string` | `"tf-state"` | no |
 | dynamodb\_point\_in\_time\_recovery | Point-in-time recovery options | `bool` | `false` | no |
 | dynamodb\_table\_name | Name of the DynamoDB Table for locking Terraform state. | `string` | `"terraform-state-lock"` | no |
-| dynamodb\_table\_tags | Tags of the DynamoDB Table for locking Terraform state. | `map(string)` | ```{ "Automation": "Terraform", "Name": "terraform-state-lock" }``` | no |
+| dynamodb\_table\_tags | Tags of the DynamoDB Table for locking Terraform state. | `map(string)` | `{}` | no |
 | enable\_s3\_public\_access\_block | Bool for toggling whether the s3 public access block resource should be enabled. | `bool` | `true` | no |
 | kms\_master\_key\_id | The AWS KMS master key ID used for the SSE-KMS encryption of the state bucket. | `string` | `""` | no |
-| log\_bucket\_tags | Tags to associate with the bucket storing the Terraform state bucket logs | `map(string)` | ```{ "Automation": "Terraform" }``` | no |
+| log\_bucket\_tags | Tags to associate with the bucket storing the Terraform state bucket logs | `map(string)` | `{}` | no |
 | log\_bucket\_versioning | A string that indicates the versioning status for the log bucket. | `string` | `"Disabled"` | no |
 | log\_name | Log name (for backwards compatibility this can be modified to logs) | `string` | `"log"` | no |
 | log\_retention | Log retention of access logs of state bucket. | `number` | `90` | no |
 | manage\_account\_alias | Manage the account alias as a resource. Set to 'false' if this behavior is not desired. | `bool` | `true` | no |
 | region | AWS region. | `string` | n/a | yes |
-| state\_bucket\_tags | Tags to associate with the bucket storing the Terraform state files | `map(string)` | ```{ "Automation": "Terraform" }``` | no |
+| state\_bucket\_tags | Tags to associate with the bucket storing the Terraform state files | `map(string)` | `{}` | no |
 
 ## Outputs
 
