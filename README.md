@@ -11,12 +11,27 @@ If the AWS account you are using already has a Terraform state bucket and lockin
 
 ## Usage for bootstrapping
 
+For AWS accounts that don't have an IAM account alias:
+
 ```hcl
 module "bootstrap" {
   source = "trussworks/bootstrap/aws"
 
   region        = "us-west-2"
   account_alias = "<ORG>-<NAME>"
+}
+```
+If the account already has an alias, use this:
+
+```hcl
+data "aws_iam_account_alias" "current" {}
+
+module "bootstrap" {
+  source = "trussworks/bootstrap/aws"
+
+  region               = "us-west-2"
+  account_alias        = data.aws_iam_account_alias.current.id
+  manage_account_alias = false
 }
 ```
 
