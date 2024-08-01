@@ -21,7 +21,9 @@ module "bootstrap" {
   account_alias = "<ORG>-<NAME>"
 }
 ```
+
 If the account already has an alias, use this:
+
 
 ```hcl
 data "aws_iam_account_alias" "current" {}
