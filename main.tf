@@ -24,7 +24,6 @@ module "terraform_state_bucket" {
   kms_master_key_id        = var.kms_master_key_id
 
   enable_s3_public_access_block = var.enable_s3_public_access_block
-  tags                          = var.state_bucket_tags
 
   depends_on = [
     module.terraform_state_bucket_logs
@@ -37,14 +36,14 @@ module "terraform_state_bucket" {
 
 module "terraform_state_bucket_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 16.2.0"
+  version = "~> 16.3.0"
 
   s3_bucket_name          = local.logging_bucket
   default_allow           = false
+  allow_s3                = true
   s3_log_bucket_retention = var.log_retention
   versioning_status       = var.log_bucket_versioning
-
-  tags = var.log_bucket_tags
+  s3_logs_prefix          = "s3/${local.state_bucket}"
 }
 
 #
@@ -72,6 +71,4 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
   point_in_time_recovery {
     enabled = var.dynamodb_point_in_time_recovery
   }
-
-  tags = var.dynamodb_table_tags
 }
