@@ -14,7 +14,7 @@ resource "aws_iam_account_alias" "alias" {
 
 module "terraform_state_bucket" {
   source  = "trussworks/s3-private-bucket/aws"
-  version = "~> 8.0.1"
+  version = "~> 8.0.2"
 
   bucket         = local.state_bucket
   logging_bucket = local.logging_bucket
