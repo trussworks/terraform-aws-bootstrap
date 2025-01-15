@@ -36,7 +36,7 @@ module "terraform_state_bucket" {
 
 module "terraform_state_bucket_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 16.3.0"
+  version = "~> 16.3.1"
 
   s3_bucket_name          = local.logging_bucket
   default_allow           = false
