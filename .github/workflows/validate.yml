@@ -14,4 +14,4 @@ on:
 
 jobs:
   validate-tf:
-    uses: trussworks/shared-actions/.github/workflows/validate-tf.yml@aae5a2c52d67c27a1ab11c348c4460ae09f21375 # v0.0.6
+    uses: trussworks/shared-actions/.github/workflows/validate-tf.yml@637d269a81479673b19d9e7b02b98d75b1805b46 # v0.1.1
